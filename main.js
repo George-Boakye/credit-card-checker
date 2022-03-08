@@ -24,6 +24,8 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 
 // Add your functions below:
+
+// Function that checks for Valid Credit card
 const validateCred = arr => {
     let lastEl = arr[arr.length - 1];
     const parity = (arr.length - 2) % 2;
@@ -50,8 +52,22 @@ const validateCred = arr => {
 
     return (lastEl % 10) === 0 ? true : false;
 }
+// calling ValidateCred Card function.
+console.log(validateCred(valid3));
 
-console.log(validateCred(valid3))
+// Function that checks for invalid cards in an array of cards
+const findInvalidCards = nestedArr =>{
+    let newArr = [];
+    nestedArr.map(element =>{
+        if (validateCred(element) === false){
+            newArr.push(element)
+        }
+    })
+
+    return newArr;
+}
+// function call
+console.log(findInvalidCards(batch));
 
 
 
