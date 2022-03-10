@@ -30,36 +30,36 @@ const validateCred = arr => {
     let lastEl = arr[arr.length - 1];
     const parity = (arr.length - 2) % 2;
     let sum = 0;
-    
+
 
     for (let i = (arr.length - 2); i >= 0; i--) {
         let digit = arr[i];
 
         if (i % 2 === parity) {
-             let a =  digit * 2;
+            let a = digit * 2;
             if (a > 9) {
-                  a -= 9;
-                sum += a ;
-            }else{
+                a -= 9;
                 sum += a;
-            }   
-        }else if(i % 2 ==! parity){
+            } else {
+                sum += a;
+            }
+        } else if (i % 2 == !parity) {
             sum += digit;
         }
     }
     lastEl += sum;
-    console.log(lastEl)
+    // console.log(lastEl)
 
     return (lastEl % 10) === 0 ? true : false;
 }
 // calling ValidateCred Card function.
-console.log(validateCred(valid3));
+// console.log(validateCred(valid3));
 
 // Function that checks for invalid cards in an array of cards
-const findInvalidCards = nestedArr =>{
+const findInvalidCards = nestedArr => {
     let newArr = [];
-    nestedArr.map(element =>{
-        if (validateCred(element) === false){
+    nestedArr.map(element => {
+        if (validateCred(element) === false) {
             newArr.push(element)
         }
     })
@@ -67,8 +67,42 @@ const findInvalidCards = nestedArr =>{
     return newArr;
 }
 // function call
-console.log(findInvalidCards(batch));
+// console.log(findInvalidCards(batch));
+
+let invalidCards = findInvalidCards(batch);
+// Function that checks for Invalid Card's companies
+const idInvalidCardCompanies = param => {
+    let companies = [];
+    for (let i = 0; i < param.length; i++) {
+        if (param[i][0] === 3) {
+    if (companies.indexOf("Amex") === -1) {
+          companies.push("Amex");
+        }     }
+        else if (param[i][0] === 4) {
+    if (companies.indexOf("Visa") === -1) {
+          companies.push("Visa");
+        }     }
+        else if (param[i][0] === 5) {
+            if (companies.indexOf("Mastercard") === -1) {
+          companies.push("Mastercard");
+        }
+        }
+        else if (param[i][0] === 6) {
+            if (companies.indexOf("Discover") === -1) {
+          companies.push("Discover");
+        }
+        }
+        else {
+            console.log('Company not found');
+        }
+    }
+
+    return companies;
+};
 
 
 
+
+
+console.log(idInvalidCardCompanies(invalidCards))
 
